@@ -13,9 +13,14 @@ Our analysis included team performance metrics, win/loss records, average point 
 
 Results of the Analysis:
 
-Classification Accuracy: All models achieved a classification accuracy of 1.0, indicating accurate predictions.
-Confusion Matrix: The confusion matrices showed high accuracy, with few incorrectly predicted outcomes.
-ROC Curve: The ROC curves for all models demonstrated strong discrimination ability, with areas under the curve indicating excellent performance.
+Classification Accuracy:
+All models achieved a classification accuracy of 1.0, indicating accurate predictions.
+
+Confusion Matrix:
+The confusion matrices showed high accuracy, with few incorrectly predicted outcomes.
+
+ROC Curve:
+The ROC curves for all models demonstrated strong discrimination ability, with areas under the curve indicating excellent performance.
 
 Conclusion:
 Overall, our NCAA March Madness prediction model performed exceptionally well, accurately predicting game outcomes based on team performance metrics.
