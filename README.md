@@ -2,11 +2,9 @@
 
 ## Project Overview
 
-Every year, millions of basketball fans attempt to create the perfect March Madness bracket. The odds are overwhelmingly against them—the chance of predicting all 63 tournament games correctly is about **1 in 9.2 quintillion**. Even predicting just the **Final Four** teams perfectly happens less than **1% of the time**.  
+I created this project to see if data science could outperform traditional prediction methods. By leveraging machine learning, I aimed to build a model that accurately predicts NCAA March Madness game outcomes.  
 
-I created this project to see if data science could outperform gut feelings and office pool strategies. By leveraging machine learning, I aimed to build a model that accurately predicts NCAA March Madness game outcomes.  
-
-I collected and processed game data from ESPN, tested multiple machine learning models, and evaluated their performance to determine the most effective approach.  
+I collected and processed 8,939 games from ESPN, tested multiple machine learning models, and evaluated their performance to determine the most effective approach.  
 
 ---
 
