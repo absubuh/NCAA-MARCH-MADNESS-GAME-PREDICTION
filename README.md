@@ -1,21 +1,18 @@
-# NCAA March Madness Prediction Model
+# 🏀 NCAA March Madness Prediction Model
 
-## Project Overview
+## 📘 Project Overview
+This project explores whether data science can outperform traditional prediction methods in NCAA March Madness. By leveraging machine learning, the goal is to accurately predict game outcomes using statistical insights and modeling techniques.
 
-I created this project to see if data science could outperform traditional prediction methods. By leveraging machine learning, I aimed to build a model that accurately predicts NCAA March Madness game outcomes.  
-
-I collected and processed 8,939 games from ESPN, tested multiple machine learning models, and evaluated their performance to determine the most effective approach.  
+I collected and processed **8,939 NCAA basketball games** from ESPN, evaluated multiple machine learning models, and selected the most effective for bracket prediction.
 
 ---
 
-## Phase 1: Collecting the Raw Data  
-
-Building a predictive model starts with gathering high-quality data. I scraped **8,939 NCAA basketball games** from ESPN, collecting key information such as:  
-
-- Final scores and point differentials  
-- Home/away team designations  
-- Detailed box score statistics  
-- Game dates and team matchups  
+## 📊 Phase 1: Data Collection
+Using Python libraries like `BeautifulSoup`, `Selenium`, and `pandas`, I scraped over 8,900 games from ESPN, capturing:
+- Final scores and point differentials
+- Home/away designations
+- Game dates and team matchups
+- Box score statistics 
 
 ### Web Scraping Process  
 
@@ -81,69 +78,12 @@ print(f"Successfully scraped {len(gameStats)} games!")
 
 ```
 
-## Phase 2: Cleaning and Organizing the Data  
-
-After retrieving the dataset, I cleaned and processed the data to ensure accuracy.  
-
-- **Rolling Averages:** I calculated rolling averages using Python but encountered an issue when computing the rolling average for a team’s first three games. This led to the inclusion of data from previous teams. I resolved this by implementing an **IF statement in Excel** to ensure correct calculations.  
-- **Win Tracking:** I computed the running total of team wins to capture momentum and performance trends.  
-
----
-
-## Phase 3: Structuring the Dataset  
-
-With a clean dataset, I structured it to include relevant features for predicting game outcomes. The final dataset contained:  
-
-- **Date:** When the game was played  
-- **Team:** Which team played  
-- **Opp:** Opponent team  
-- **PTS:** Points scored by the home team  
-- **OPPpts:** Points scored by the away team  
-- **Home:** Whether the game was played at home  
-- **PD:** Point differential (team score minus opponent score)  
-- **Win:** Whether the team won (1) or lost (0)  
-- **rowcount:** Total games played in the timeframe  
-- **Total Wins:** Cumulative wins for the team  
-- **AvgPD:** Average Point Differential  
-
-![Dataset Preview](https://github.com/user-attachments/assets/87d041ba-853f-4eda-a4ba-15f19eef7767)  
-
----
-
-## Phase 4: Model Selection and Analysis  
-
-I applied three machine learning techniques to predict game outcomes:  
-
-1. **Logistic Regression** – A simple, interpretable classification model.  
-2. **Decision Tree** – Captures non-linear relationships and visualizes decision-making.  
-3. **Random Forest** – Reduces overfitting by combining multiple decision trees for more stable predictions.  
-
-# 🏀 NCAA March Madness Prediction Model
-
-## 📘 Project Overview
-This project explores whether data science can outperform traditional prediction methods in NCAA March Madness. By leveraging machine learning, the goal is to accurately predict game outcomes using statistical insights and modeling techniques.
-
-I collected and processed **8,939 NCAA basketball games** from ESPN, evaluated multiple machine learning models, and selected the most effective for bracket prediction.
-
----
-
-## 📊 Phase 1: Data Collection
-Using Python libraries like `BeautifulSoup`, `Selenium`, and `pandas`, I scraped over 8,900 games from ESPN, capturing:
-- Final scores and point differentials
-- Home/away designations
-- Game dates and team matchups
-- Box score statistics
-
-A headless browser was used to automate navigation and extract data efficiently across a set date range.
-
----
-
 ## 🧼 Phase 2: Data Cleaning
 To ensure model accuracy, I cleaned and validated the dataset:
 - Fixed inconsistent team naming
 - Addressed missing values and outliers
 - Calculated rolling averages (handled edge cases using Excel logic)
-- Tracked win momentum for each team
+- Tracked win momentum for each team.  
 
 ---
 
@@ -163,25 +103,15 @@ The dataset was structured to include:
 
 ---
 
-## 🧠 Phase 4: Model Selection
-I trained three ML models to classify game outcomes:
-1. **Logistic Regression** – Interpretable baseline model
-2. **Decision Tree** – Captures non-linear features
-3. **Random Forest** – Robust ensemble approach
-
-Performance was evaluated using accuracy and AUC.
-
----
-
-## 💡 Bonus: Dream Team Momentum Analysis
-To enhance prediction accuracy, I added a "Dream Team" feature that highlights team momentum leading up to each game. This script uses a rolling 3-game window to compute:
+## 🔍 Team Momentum Calculation
+To enhance prediction accuracy, I built a model feature that highlights team momentum using rolling metrics. This script uses a 3-game rolling window to compute:
 
 - 🏆 `TotalWins`: Number of wins over the last 3 games
 - 📊 `AvgPD`: Average Point Differential (team score minus opponent score)
 
-These rolling metrics help identify hot teams and can be used as additional model inputs.
+These features are integrated into the main prediction model.
 
-### 🔍 Sample Code
+### 🔎 Sample Code
 ```python
 import pandas as pd
 
@@ -207,26 +137,25 @@ allGames['TotalWins'] = allGames.groupby('Team')['Win'].rolling(rollingWindow, c
 allGames['AvgPD'] = allGames.groupby('Team')['PD'].rolling(rollingWindow, closed='left').mean().reset_index(0, drop=True)
 
 dream_team_stats = allGames[allGames['rowcount'] > rollingWindow]
-```
+``` 
+
+## 🧠 Phase 4: Model Selection
+I trained three ML models to classify game outcomes:
+1. **Logistic Regression** – Interpretable baseline model
+2. **Decision Tree** – Captures non-linear features
+3. **Random Forest** – Robust ensemble approach
+
+Performance was evaluated using accuracy and AUC.
+
+## 🎯 Results
+After gathering the data, cleaning it, and building models using team momentum and historical performance, I tested how well the predictions held up.
+
+Out of the thousands of games I scraped and processed, the final model correctly predicted the winner **71.2%** of the time. While there's always some unpredictability in sports, especially in March Madness, this result showed that using trends like recent wins and point differentials can actually give you a solid edge when making bracket picks.
+
+It was cool to see data turn into something that could compete with or even beat gut instinct and guesswork.
 
 ---
 
-## 🧩 Pseudocode Overview
-```python
-# Step 1: Load Dataset
-# Step 2: Clean data (nulls, inconsistencies, categorization)
-# Step 3: Select relevant features
-# Step 4: Create new structured dataset
-# Step 5: Define target variable (Result)
-# Step 6: Split data into training/testing sets
-# Step 7: Preprocess data
-# Step 8: Create ML models (Logistic Regression, Random Forest, Decision Tree)
-# Step 9: Train models
-# Step 10: Evaluate models (AUC, Confusion Matrix)
-# Step 11: Apply model to make predictions
-```
-
----
 
 ## 📬 Contact
 Built by Abdullah Subuh | [LinkedIn](https://www.linkedin.com/in/asubuh111)
