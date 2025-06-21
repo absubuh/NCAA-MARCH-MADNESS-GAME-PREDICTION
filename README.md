@@ -118,3 +118,116 @@ I applied three machine learning techniques to predict game outcomes:
 2. **Decision Tree** – Captures non-linear relationships and visualizes decision-making.  
 3. **Random Forest** – Reduces overfitting by combining multiple decision trees for more stable predictions.  
 
+# 🏀 NCAA March Madness Prediction Model
+
+## 📘 Project Overview
+This project explores whether data science can outperform traditional prediction methods in NCAA March Madness. By leveraging machine learning, the goal is to accurately predict game outcomes using statistical insights and modeling techniques.
+
+I collected and processed **8,939 NCAA basketball games** from ESPN, evaluated multiple machine learning models, and selected the most effective for bracket prediction.
+
+---
+
+## 📊 Phase 1: Data Collection
+Using Python libraries like `BeautifulSoup`, `Selenium`, and `pandas`, I scraped over 8,900 games from ESPN, capturing:
+- Final scores and point differentials
+- Home/away designations
+- Game dates and team matchups
+- Box score statistics
+
+A headless browser was used to automate navigation and extract data efficiently across a set date range.
+
+---
+
+## 🧼 Phase 2: Data Cleaning
+To ensure model accuracy, I cleaned and validated the dataset:
+- Fixed inconsistent team naming
+- Addressed missing values and outliers
+- Calculated rolling averages (handled edge cases using Excel logic)
+- Tracked win momentum for each team
+
+---
+
+## 🧱 Phase 3: Dataset Structuring
+The dataset was structured to include:
+- `Date`: Game date
+- `Team` and `Opp`: Matchup info
+- `PTS` and `OPPpts`: Points scored
+- `Home`: Home court flag
+- `PD`: Point Differential
+- `Win`: Binary win/loss indicator
+- `rowcount`: Number of games played
+- `TotalWins`: Running win total
+- `AvgPD`: Average point differential over recent games
+
+![Dataset Preview](https://github.com/user-attachments/assets/87d041ba-853f-4eda-a4ba-15f19eef7767)
+
+---
+
+## 🧠 Phase 4: Model Selection
+I trained three ML models to classify game outcomes:
+1. **Logistic Regression** – Interpretable baseline model
+2. **Decision Tree** – Captures non-linear features
+3. **Random Forest** – Robust ensemble approach
+
+Performance was evaluated using accuracy and AUC.
+
+---
+
+## 💡 Bonus: Dream Team Momentum Analysis
+To enhance prediction accuracy, I added a "Dream Team" feature that highlights team momentum leading up to each game. This script uses a rolling 3-game window to compute:
+
+- 🏆 `TotalWins`: Number of wins over the last 3 games
+- 📊 `AvgPD`: Average Point Differential (team score minus opponent score)
+
+These rolling metrics help identify hot teams and can be used as additional model inputs.
+
+### 🔍 Sample Code
+```python
+import pandas as pd
+
+df = pd.read_excel('gameStats.xlsx')
+
+homeDF = df[['Date','HomeTeam','AwayTeam','homePTS','awayPTS']].copy()
+awayDF = df[['Date','AwayTeam','HomeTeam','awayPTS','homePTS']].copy()
+
+homeDF.rename(columns={"HomeTeam":"Team","AwayTeam":"Opp","homePTS":"PTS","awayPTS":"OPPpts"}, inplace=True)
+awayDF.rename(columns={"AwayTeam":"Team","HomeTeam":"Opp","awayPTS":"PTS","homePTS":"OPPpts"}, inplace=True)
+
+homeDF['Home'] = 1
+awayDF['Home'] = 0
+
+allGames = pd.concat([homeDF, awayDF])
+allGames['PD'] = allGames['PTS'] - allGames['OPPpts']
+allGames['Win'] = (allGames['PD'] >= 0).astype(int)
+allGames.sort_values(by=['Team', 'Date'], inplace=True)
+allGames['rowcount'] = allGames.groupby('Team').cumcount() + 1
+
+rollingWindow = 3
+allGames['TotalWins'] = allGames.groupby('Team')['Win'].rolling(rollingWindow, closed='left').sum().reset_index(0, drop=True)
+allGames['AvgPD'] = allGames.groupby('Team')['PD'].rolling(rollingWindow, closed='left').mean().reset_index(0, drop=True)
+
+dream_team_stats = allGames[allGames['rowcount'] > rollingWindow]
+```
+
+---
+
+## 🧩 Pseudocode Overview
+```python
+# Step 1: Load Dataset
+# Step 2: Clean data (nulls, inconsistencies, categorization)
+# Step 3: Select relevant features
+# Step 4: Create new structured dataset
+# Step 5: Define target variable (Result)
+# Step 6: Split data into training/testing sets
+# Step 7: Preprocess data
+# Step 8: Create ML models (Logistic Regression, Random Forest, Decision Tree)
+# Step 9: Train models
+# Step 10: Evaluate models (AUC, Confusion Matrix)
+# Step 11: Apply model to make predictions
+```
+
+---
+
+## 📬 Contact
+Built by Abdullah Subuh | [LinkedIn](https://www.linkedin.com/in/asubuh111)
+
