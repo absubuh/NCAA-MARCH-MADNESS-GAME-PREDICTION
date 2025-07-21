@@ -1,13 +1,13 @@
-# 🏀 NCAA March Madness Prediction Model
+# NCAA March Madness Prediction Model
 
-## 📘 Project Overview
+## Project Overview
 This project explores whether data science can outperform traditional prediction methods in NCAA March Madness. By leveraging machine learning, the goal is to accurately predict game outcomes using statistical insights and modeling techniques.
 
 I collected and processed **8,939 NCAA basketball games** from ESPN, evaluated multiple machine learning models, and selected the most effective for bracket prediction.
 
 ---
 
-## 📊 Phase 1: Data Collection
+## Phase 1: Data Collection
 Using Python libraries like `BeautifulSoup`, `Selenium`, and `pandas`, I scraped over 8,900 games from ESPN, capturing:
 - Final scores and point differentials
 - Home/away designations
@@ -78,7 +78,7 @@ print(f"Successfully scraped {len(gameStats)} games!")
 
 ```
 
-## 🧼 Phase 2: Data Cleaning
+##  Phase 2: Data Cleaning
 To ensure model accuracy, I cleaned and validated the dataset:
 - Fixed inconsistent team naming
 - Addressed missing values and outliers
@@ -87,7 +87,7 @@ To ensure model accuracy, I cleaned and validated the dataset:
 
 ---
 
-## 🧱 Phase 3: Dataset Structuring
+##  Phase 3: Dataset Structuring
 The dataset was structured to include:
 - `Date`: Game date
 - `Team` and `Opp`: Matchup info
@@ -106,12 +106,12 @@ The dataset was structured to include:
 ## 🔍 Team Momentum Calculation
 To enhance prediction accuracy, I built a model feature that highlights team momentum using rolling metrics. This script uses a 3-game rolling window to compute:
 
-- 🏆 `TotalWins`: Number of wins over the last 3 games
-- 📊 `AvgPD`: Average Point Differential (team score minus opponent score)
+- `TotalWins`: Number of wins over the last 3 games
+- `AvgPD`: Average Point Differential (team score minus opponent score)
 
 These features are integrated into the main prediction model.
 
-### 🔎 Sample Code
+### Sample Code
 ```python
 import pandas as pd
 
@@ -139,7 +139,7 @@ allGames['AvgPD'] = allGames.groupby('Team')['PD'].rolling(rollingWindow, closed
 dream_team_stats = allGames[allGames['rowcount'] > rollingWindow]
 ``` 
 
-## 🧠 Phase 4: Model Selection
+##  Phase 4: Model Selection
 I trained three ML models to classify game outcomes:
 1. **Logistic Regression** – Interpretable baseline model
 2. **Decision Tree** – Captures non-linear features
@@ -147,7 +147,7 @@ I trained three ML models to classify game outcomes:
 
 Performance was evaluated using accuracy and AUC.
 
-## 🎯 Results
+##  Results
 After gathering the data, cleaning it, and building models using team momentum and historical performance, I tested how well the predictions held up.
 
 Out of the thousands of games I scraped and processed, the final model correctly predicted the winner **71.2%** of the time. While there's always some unpredictability in sports, especially in March Madness, this result showed that using trends like recent wins and point differentials can actually give you a solid edge when making bracket picks.
