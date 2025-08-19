@@ -1,7 +1,3 @@
-**Abdullah Subuh — Data Analyst**  
-SQL • Python • Power BI • Tableau
-
-
 # NCAA March Madness Prediction Model
 
 ## Project Overview
