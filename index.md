@@ -1,5 +1,3 @@
-# NCAA March Madness Prediction Model
-
 ## Project Overview
 This project explores whether data science can outperform traditional prediction methods in NCAA March Madness. By leveraging machine learning, the goal is to accurately predict game outcomes using statistical insights and modeling techniques.
 
