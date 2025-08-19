@@ -1,5 +1,5 @@
 title: NCAA March Madness Game Prediction
-description: In this project, I used data from NCAA games from the previous three seasons to create a logistic regression model in Python that would predict the winners of future games.
+description: NCAA game outcome predictions with Python logistic regression by Abdullah Subuh
 remote_theme: pages-themes/slate@v0.2.0   # darker than minimal
 plugins:
   - jekyll-remote-theme
