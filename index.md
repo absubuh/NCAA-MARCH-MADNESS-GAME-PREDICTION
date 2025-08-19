@@ -1,6 +1,3 @@
----
-title: Northwind Company Analysis
----
 # NCAA March Madness Prediction Model
 
 ## Project Overview
