@@ -163,7 +163,5 @@ It was cool to see data turn into something that could compete with or even beat
 ## 📬 Contact
 Built by Abdullah Subuh | [LinkedIn](https://www.linkedin.com/in/abdullahsubuh)
 
-theme: jekyll-theme-cayman
-
 
 
